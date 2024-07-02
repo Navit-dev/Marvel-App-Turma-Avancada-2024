@@ -50,4 +50,4 @@ pubspec.lock
 ios/Pods
 ios/PodFile.lock
 
-/lib/src/core/utils/constants/env.dart
+**/constants/env.dart
