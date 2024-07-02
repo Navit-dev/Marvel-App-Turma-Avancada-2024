@@ -9,7 +9,7 @@ class AppModule extends Module {
   void binds(i) {
     i.addInstance<Dio>(NavitDio(
       globalInterceptor: [
-        // AuthInterceptor(),
+        AuthInterceptor(),
         LoggerInterceptor(),
       ],
     ));

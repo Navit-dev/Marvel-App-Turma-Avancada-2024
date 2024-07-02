@@ -1,5 +1,9 @@
 name: Test on PR
 'on': pull_request
+env:
+  # Setting an environment variable with the value of a configuration variable
+  env_var: ${{ secrets.ENV_FILE_CONTENT }}
+
 jobs:
   ios:
       runs-on: macos-latest
@@ -11,7 +15,7 @@ jobs:
           with:
             channel: stable
             flutter-version-file: pubspec.yaml # path to pubspec.yaml
-        - run: echo ${{ secrets.ENV_FILE_CONTENT }} | base64 --decode > lib/src/core/utils/constants/env.dart
+        - run: echo $env_var | base64 --decode > lib/src/core/utils/constants/env.dart
         - run: flutter pub get
         - run: flutter build ios --release --no-codesign
   android:
@@ -24,7 +28,7 @@ jobs:
           with:
             channel: stable
             flutter-version-file: pubspec.yaml # path to pubspec.yaml
-        - run: echo ${{ secrets.ENV_FILE_CONTENT }} | base64 --decode > lib/src/core/utils/constants/env.dart
+        - run: echo $env_var | base64 --decode > lib/src/core/utils/constants/env.dart
         - run: flutter pub get
         - run: flutter build appbundle --release
   tests:
@@ -37,7 +41,7 @@ jobs:
           with:
             channel: stable
             flutter-version-file: pubspec.yaml # path to pubspec.yaml
-        - run: echo ${{ secrets.ENV_FILE_CONTENT }} | base64 --decode > lib/src/core/utils/constants/env.dart
+        - run: echo $env_var | base64 --decode > lib/src/core/utils/constants/env.dart
         - run: flutter pub get
         - run: flutter analyze
         - run: flutter test --coverage

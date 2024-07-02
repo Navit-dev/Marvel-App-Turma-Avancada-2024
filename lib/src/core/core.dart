@@ -7,7 +7,7 @@ export './helper/assets.dart';
 export './helper/extensions.dart';
 export './helper/functions.dart';
 export './network/http/navit_dio.dart';
-// export './network/http/auth_interceptor.dart';
+export './network/http/auth_interceptor.dart';
 export './network/http/logger_interceptor.dart';
 export './network/http/navit_exception.dart';
 export './network/http/navit_http_client.dart';
