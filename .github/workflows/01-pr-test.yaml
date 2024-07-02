@@ -13,7 +13,6 @@ jobs:
             flutter-version-file: pubspec.yaml # path to pubspec.yaml
         - run: echo ${{ secrets.ENV_FILE_CONTENT }} | base64 --decode > lib/src/core/utils/constants/env.dart
         - run: flutter pub get
-        - run: flutter test --coverage
         - run: flutter build ios --release --no-codesign
   android:
       runs-on: macos-latest
@@ -27,5 +26,18 @@ jobs:
             flutter-version-file: pubspec.yaml # path to pubspec.yaml
         - run: echo ${{ secrets.ENV_FILE_CONTENT }} | base64 --decode > lib/src/core/utils/constants/env.dart
         - run: flutter pub get
-        - run: flutter test --coverage
         - run: flutter build appbundle --release
+  tests:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Clone repository
+          uses: actions/checkout@v4
+        - name: Set up Flutter
+          uses: subosito/flutter-action@v2
+          with:
+            channel: stable
+            flutter-version-file: pubspec.yaml # path to pubspec.yaml
+        - run: echo ${{ secrets.ENV_FILE_CONTENT }} | base64 --decode > lib/src/core/utils/constants/env.dart
+        - run: flutter pub get
+        - run: flutter analyze
+        - run: flutter test --coverage
