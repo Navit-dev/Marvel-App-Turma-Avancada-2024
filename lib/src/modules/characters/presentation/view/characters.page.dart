@@ -53,33 +53,96 @@ class _CharactersPageState extends State<CharactersPage> {
             );
           }
           List<CharacterData> characters = state.value;
-          return ListView.separated(
-            itemBuilder: (context, i) {
-              CharacterData character = characters[i];
+          return LayoutAdapterWidget(
+            smallBuilder: (context, child) => ListView.separated(
+              itemBuilder: (context, i) {
+                CharacterData character = characters[i];
 
-              return HeroControllerScope(
-                controller: HeroController(),
-                child: Hero(
-                  transitionOnUserGestures: true,
-                  tag: character.id.toString(),
-                  child: PersonHorizontalCard(
-                    id: character.id.toString(),
-                    imageUrl: character.thumbnail.toString(),
-                    title: character.name,
-                    description: character.description,
-                    onTap: () {
-                      // _charactersController.lastSelectedCharacter = character;
-                      MarvelRouter.pushNamed(
-                          '/characters/person/${character.id}');
-                    },
+                return HeroControllerScope(
+                  controller: HeroController(),
+                  child: Hero(
+                    transitionOnUserGestures: true,
+                    tag: character.id.toString(),
+                    child: PersonHorizontalCard(
+                      id: character.id.toString(),
+                      imageUrl: character.thumbnail.toString(),
+                      title: character.name,
+                      description: character.description,
+                      onTap: () {
+                        // _charactersController.lastSelectedCharacter = character;
+                        MarvelRouter.pushNamed(
+                            '/characters/person/${character.id}');
+                      },
+                    ),
                   ),
-                ),
-              );
-            },
-            separatorBuilder: (context, i) => const SizedBox(
-              height: 12,
+                );
+              },
+              separatorBuilder: (context, i) => const SizedBox(
+                height: 12,
+              ),
+              itemCount: characters.length,
             ),
-            itemCount: characters.length,
+            mediumBuilder: (context, child) => ListView.separated(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemBuilder: (context, i) {
+                CharacterData character = characters[i];
+
+                return HeroControllerScope(
+                  controller: HeroController(),
+                  child: Hero(
+                    transitionOnUserGestures: true,
+                    tag: character.id.toString(),
+                    child: PersonVerticalCard(
+                      id: character.id.toString(),
+                      imageUrl: character.thumbnail.toString(),
+                      title: character.name,
+                      description: character.description,
+                      onTap: () {
+                        // _charactersController.lastSelectedCharacter = character;
+                        MarvelRouter.pushNamed(
+                            '/characters/person/${character.id}');
+                      },
+                    ),
+                  ),
+                );
+              },
+              separatorBuilder: (context, i) => const SizedBox(
+                height: 12,
+              ),
+              itemCount: characters.length,
+            ),
+            largeBuilder: (context, child) => ListView.separated(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemBuilder: (context, i) {
+                CharacterData character = characters[i];
+
+                return HeroControllerScope(
+                  controller: HeroController(),
+                  child: Hero(
+                    transitionOnUserGestures: true,
+                    tag: character.id.toString(),
+                    child: PersonVerticalCard(
+                      id: character.id.toString(),
+                      imageUrl: character.thumbnail.toString(),
+                      title: character.name,
+                      description: character.description,
+                      proporcional: 6.7,
+                      onTap: () {
+                        // _charactersController.lastSelectedCharacter = character;
+                        MarvelRouter.pushNamed(
+                            '/characters/person/${character.id}');
+                      },
+                    ),
+                  ),
+                );
+              },
+              separatorBuilder: (context, i) => const SizedBox(
+                height: 12,
+              ),
+              itemCount: characters.length,
+            ),
           );
         },
       ),

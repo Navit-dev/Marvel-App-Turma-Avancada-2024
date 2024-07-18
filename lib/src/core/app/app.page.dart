@@ -10,6 +10,18 @@ class AppPage extends StatelessWidget {
       title: 'Marvel App',
       theme: ThemeData(primarySwatch: Colors.blue),
       routerConfig: Modular.routerConfig,
+      builder: (context, child) {
+        return Stack(
+          children: [
+            child ?? Container(),
+            Positioned(
+              bottom: 10,
+              right: 10,
+              child: Text("SETAS"),
+            ),
+          ],
+        );
+      },
     );
   }
 }

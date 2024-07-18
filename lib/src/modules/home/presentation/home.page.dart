@@ -14,24 +14,36 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Center(
-            child: Text('Marvel App'),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () async {
-                await showSearch(
-                  context: context,
-                  delegate: marvelDI<SearchDelegate<String>>(),
-                );
-              },
-              icon: const Icon(Icons.search),
-            ),
-          ],
+      appBar: AppBar(
+        title: const Center(
+          child: Text('Marvel App'),
         ),
-        body: StaggeredGrid.count(
+        actions: [
+          IconButton(
+            onPressed: () async {
+              await showSearch(
+                context: context,
+                delegate: marvelDI<SearchDelegate<String>>(),
+              );
+            },
+            icon: const Icon(Icons.search),
+          ),
+        ],
+      ),
+      body: LayoutAdapterWidget(
+        smallBuilder: (context, child) => StaggeredGrid.count(
           crossAxisCount: 2,
+          children: [...(child as Column).children],
+        ),
+        mediumBuilder: (context, child) => StaggeredGrid.count(
+          crossAxisCount: 3,
+          children: [...(child as Column).children],
+        ),
+        largeBuilder: (context, child) => StaggeredGrid.count(
+          crossAxisCount: 5,
+          children: [...(child as Column).children],
+        ),
+        child: Column(
           children: [
             HomeItemCard(
               label: 'A-Bomb',
@@ -78,45 +90,8 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {},
             ),
           ],
-        )
-        // Column(
-        //   crossAxisAlignment: CrossAxisAlignment.center,
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: [
-        // HomeItemCard(
-        //   label: 'A-Bomb',
-        //   onPressed: () {
-        //     MarvelRouter.pushNamed('/characters/person/1017100');
-        //   },
-        // ),
-        // HomeItemCard(
-        //   label: 'Characters',
-        //   onPressed: () {
-        //     MarvelRouter.pushNamed('/characters/');
-        //   },
-        // ),
-        // HomeItemCard(
-        //   label: 'Comics',
-        //   onPressed: () {},
-        // ),
-        // HomeItemCard(
-        //   label: 'Creators',
-        //   onPressed: () {},
-        // ),
-        // HomeItemCard(
-        //   label: 'Series',
-        //   onPressed: () {},
-        // ),
-        // HomeItemCard(
-        //   label: 'Stories',
-        //   onPressed: () {},
-        // ),
-        // HomeItemCard(
-        //   label: 'Events',
-        //   onPressed: () {},
-        // ),
-        //   ],
-        // ),
-        );
+        ),
+      ),
+    );
   }
 }

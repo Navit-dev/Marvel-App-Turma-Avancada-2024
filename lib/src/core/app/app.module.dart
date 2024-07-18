@@ -7,6 +7,7 @@ import 'package:marvel_app/src/core/core.dart';
 class AppModule extends Module {
   @override
   void binds(i) {
+    i.addInstance(DpadController());
     i.addInstance<Dio>(NavitDio(
       globalInterceptor: [
         AuthInterceptor(),

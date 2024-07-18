@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marvel_app/src/core/core.dart';
 import 'package:marvel_app/src/ui_style/ui_style.dart';
 
 class SingleItemCard extends StatelessWidget {
@@ -21,33 +22,35 @@ class SingleItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: padding,
-      child: GestureDetector(
-        onTap: onPressed,
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: backgroundImage,
-              fit: BoxFit.cover,
+      child: DpadWidget(
+        onTapOrClick: onPressed,
+        builder: (context, isFocus) {
+          return Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: backgroundImage,
+                fit: BoxFit.cover,
+              ),
+              border: Border.all(
+                color: (isFocus) ? secondaryColor : primaryColor,
+                width: 4,
+              ),
+              borderRadius: defaultBorderRadius,
             ),
-            border: Border.all(
-              color: primaryColor,
-              width: 3,
-            ),
-            borderRadius: defaultBorderRadius,
-          ),
-          child: Padding(
-            padding: margin,
-            child: Text(
-              label ?? '',
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 24,
-                color: lightTextPrimaryColor,
-                fontWeight: FontWeight.bold,
+            child: Padding(
+              padding: margin,
+              child: Text(
+                label ?? '',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 24,
+                  color: lightTextPrimaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
