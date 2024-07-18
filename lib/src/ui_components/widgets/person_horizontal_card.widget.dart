@@ -38,6 +38,7 @@ class PersonHorizontalCard extends StatelessWidget {
                       child: AspectRatio(
                         aspectRatio: (3 / 4) - 0.1,
                         child: SingleItemCard(
+                          onPressed: onTap,
                           backgroundImage: NetworkImage(imageUrl!),
                         ),
                       ),
@@ -47,6 +48,7 @@ class PersonHorizontalCard extends StatelessWidget {
                       child: AspectRatio(
                         aspectRatio: (3 / 4) - 0.1,
                         child: SingleItemCard(
+                          onPressed: onTap,
                           backgroundImage:
                               randonBackgroundImage().imageProvider,
                         ),

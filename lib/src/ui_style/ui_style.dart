@@ -3,6 +3,7 @@ library ui_style;
 import 'package:flutter/material.dart';
 
 const Color primaryColor = Colors.red;
+const Color secondaryColor = Colors.blueAccent;
 const Color lightTextPrimaryColor = Colors.white;
 const Color darkTextPrimaryColor = Colors.black;
 

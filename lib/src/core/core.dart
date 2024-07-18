@@ -3,6 +3,8 @@ library core;
 export './app/app.module.dart';
 export './app/app.page.dart';
 export './data/model.dart';
+export './dpad/dpad_controller.dart';
+export './dpad/dpad_widget.dart';
 export './helper/assets.dart';
 export './helper/extensions.dart';
 export './helper/functions.dart';
