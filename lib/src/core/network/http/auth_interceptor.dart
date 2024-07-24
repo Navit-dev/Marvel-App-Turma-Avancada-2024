@@ -6,6 +6,9 @@ import 'package:marvel_app/src/core/core.dart';
 class AuthInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    if (options.extra['external'] ?? false) {
+      return super.onRequest(options, handler);
+    }
     String ts = DateTime.now().millisecondsSinceEpoch.toString();
     String publickey = Env.backendPublickey.value;
     String privatekey = Env.backendPrivatekey.value;
@@ -19,7 +22,6 @@ class AuthInterceptor extends Interceptor {
       'hash': hash.toLowerCase(),
       'apikey': publickey,
     });
-
-    super.onRequest(options, handler);
+    return super.onRequest(options, handler);
   }
 }

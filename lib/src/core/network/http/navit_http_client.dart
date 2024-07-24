@@ -19,13 +19,14 @@ class NavitHttpClient {
 
   Future<NavitResponse> request(INavitRequest request) async {
     try {
-      final Response<dynamic> response = await dio.request(
+      final Response response = await dio.request(
         request.path,
         data: request.body,
         queryParameters: request.queryParams,
         options: Options(
           method: request.method.toString(),
           headers: request.headers,
+          extra: request.extras,
         ),
       );
       // final Map<String, dynamic> body = {
@@ -55,7 +56,7 @@ class NavitHttpClient {
       }
     } on NavitHttpException catch (e) {
       throw NavitHttpException(e.statusCode, e.statusMessage, e.data);
-    } on DioException catch (e) {
+    } on DioException catch (e, s) {
       if (!await checkPinning(e)) {
         throw NavitHttpException(999, 'Sem conexão', {
           'messageError': 'Conexão instável. Verifique sua rede de internet.'

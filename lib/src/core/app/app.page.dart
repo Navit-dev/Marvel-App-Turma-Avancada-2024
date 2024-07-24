@@ -14,11 +14,11 @@ class AppPage extends StatelessWidget {
         return Stack(
           children: [
             child ?? Container(),
-            Positioned(
-              bottom: 10,
-              right: 10,
-              child: Text("SETAS"),
-            ),
+            // Positioned(
+            //   bottom: 10,
+            //   right: 10,
+            //   child: Text("SETAS"),
+            // ),
           ],
         );
       },
